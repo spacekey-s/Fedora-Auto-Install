@@ -11,9 +11,6 @@ def limpar():#limpar
     ["clear"]
   )
 
-def teste():
-  print("teste")
-
 #instalar heroic launcher
 def instalar_heroic():
   subprocess.run(
