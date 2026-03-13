@@ -2,16 +2,16 @@ import subprocess
 import time
 import getpass
 
-#password
+# --- password ---
 password = getpass.getpass("Senha sudo: ")+"\n"
 
-#functions
+# --- functions ---
 def limpar():#limpar
   subprocess.run(
     ["clear"]
   )
 
-#instalar heroic launcher
+# --- instalar heroic launcher ---
 def instalar_heroic():
   subprocess.run(
     [
@@ -33,7 +33,7 @@ def instalar_heroic():
     ]
   )
 
-#instalar pacotes
+# --- instalar pacotes ---
 def install(packages):
   subprocess.run(
             ["sudo", "-S", "dnf", "install", "-y"] + packages,
@@ -41,7 +41,7 @@ def install(packages):
             text=True
           )
 
-#verificar a instalação do rpm
+# --- verificar a instalação do rpm ---
 def check_rpmfusion(password):
 
     repos = subprocess.run(
@@ -83,11 +83,13 @@ def menu():
     try:
       time.sleep(1)
       limpar()
-      #menu
+
+      #--- Menu do programa ---
       menu = int(input("""Opções do sistema:
         [ 1 ] Atualizar
         [ 2 ] Instalar Nvidia Drivers
         [ 3 ] Fedora Gaming
+        [ 4 ] Ferramentas Hacking (beta)
         [ 0 ] Sair
         => """))
     except ValueError:
@@ -95,11 +97,13 @@ def menu():
       continue
 
     match menu:
+      # --- Saída do programa ---
       case 0:
         print("Até logo...")
         time.sleep(1)
         break
 
+      # --- Atualizar o sistema ---
       case 1:
         #hola
         print("Ola! Atualizando o sistema...")
@@ -112,6 +116,7 @@ def menu():
           text=True
         )
 
+      #--- drivers Nvidia ---
       case 2:
         time.sleep(1)
         limpar()
@@ -150,6 +155,7 @@ def menu():
 
             install(driversOld)
 
+      # --- Games ---
       case 3:
         appsGame = [
         "steam",
@@ -165,6 +171,103 @@ def menu():
 
         instalar_heroic()
         install(appsGame)
+
+      #--- Ferramentas Hacking ---
+      case 4:
+        limpar()
+        menuFerramentas = int(input("""
+          [ 1 ] Softwares
+          [ 2 ] Utilitários
+          [ 0 ] Voltar
+          => """))
+        match menuFerramentas:
+          case 1:
+            softwares = [
+              "nmap", "masscan", "whois",
+              "nikto", "sqlmap",
+              "john", "hashcat", "hydra",
+              "wireshark", "tcpdump", "aircrack-ng",
+              "radare2", "binwalk",
+            ]
+
+            install(softwares)
+
+          case 2:
+            # Ferramentas instaláveis via dnf no Fedora
+            ferramentas = [
+
+                # --- Reconhecimento ---
+                "nmap",            # scanner de portas e redes
+                "masscan",         # scanner de portas ultra-rápido
+                "whois",           # consultas WHOIS
+                "bind-utils",      # dig, nslookup, host
+                "traceroute",      # rastreamento de rotas
+                "mtr",             # traceroute interativo em tempo real
+
+                # --- Web ---
+                "nikto",           # scanner de vulnerabilidades web
+                "sqlmap",          # SQL injection
+                "gobuster",        # brute force de diretórios/subdomínios
+
+                # --- Senhas e Hashes ---
+                "john",            # John the Ripper - cracking de hashes
+                "hashcat",         # cracking com GPU
+                "hydra",           # brute force de login em serviços
+
+                # --- Redes e Wireless ---
+                "wireshark",       # análise de pacotes (GUI)
+                "wireshark-cli",   # tshark - captura de pacotes no terminal
+                "aircrack-ng",     # auditoria de redes Wi-Fi
+                "tcpdump",         # captura de tráfego via terminal
+                "nmap-ncat",       # netcat moderno (ncat)
+                "iftop",           # monitor de tráfego por interface
+                "nload",           # gráfico de uso de banda em tempo real
+
+                # --- Forense e Reversão ---
+                "binwalk",         # análise de firmwares
+                "radare2",         # engenharia reversa
+                "strace",          # rastreia chamadas de sistema
+
+                # --- Sistema e Rede ---
+                "net-tools",       # ifconfig, netstat, route, arp
+                "iproute",         # ip, ss
+                "iputils",         # ping, tracepath
+                "curl",            # transferência de dados via URL
+                "wget",            # download de arquivos
+                "htop",            # monitor de processos interativo
+                "btop",            # monitor visual moderno
+                "lsof",            # lista arquivos/portas abertos por processos
+                "psmisc",          # killall, pstree, fuser
+                "procps-ng",       # ps, top, free
+                "util-linux",      # lsblk, blkid, fdisk
+                "iotop",           # monitor de I/O de disco
+                "dstat",           # estatísticas de sistema em tempo real
+                "tor",             # anonimização de tráfego
+                "proxychains-ng",  # forçar tráfego por proxies/tor
+
+                # --- Utilitários ---
+                "git",             # controle de versão
+                "vim",             # editor de texto no terminal
+                "neovim",          # vim moderno
+                "tmux",            # multiplexador de terminal
+                "make",            # automação de build
+                "gcc",             # compilador C
+                "python3-pip",     # gerenciador de pacotes Python
+                "bash-completion", # autocomplete no bash
+                "tree",            # exibe estrutura de diretórios
+                "ncdu",            # análise de uso de disco interativa
+                "ranger",          # gerenciador de arquivos no terminal
+                "bat",             # cat com syntax highlight
+                "ripgrep",         # busca em arquivos ultra-rápida (rg)
+                "fd-find",         # substituto moderno do find
+                "jq",              # manipulação de JSON no terminal
+                "unzip",           # descompactação de .zip
+                "p7zip",           # descompactação de .7z e outros
+                "file",            # identifica tipo de arquivo
+
+            ]
+
+            install(ferramentas)
 
 check_rpmfusion(password)
 menu()
