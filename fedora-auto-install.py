@@ -32,7 +32,7 @@ def instalar_proton():
     ]
   )
 
-# --- instalar heroic launcher ---
+# --- instala heroic launcher ---
 def instalar_heroic():
   subprocess.run(
     [
