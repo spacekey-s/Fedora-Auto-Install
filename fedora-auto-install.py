@@ -12,6 +12,25 @@ def limpar():#limpar
     ["clear"]
   )
 
+def instalar_proton():
+  subprocess.run(
+    [
+      "sudo",
+      "flatpak remote-add",
+      "--if-not-exists",
+      "flathub",
+      "https://flathub.org/repo/flathub.flatpakrepo"
+    ]
+  )
+  subprocess.run(
+    [
+      "flatpak",
+      "install",
+      "flathub",
+      "com.vysp3r.ProtonPlus"
+    ]
+  )
+
 # --- instalar heroic launcher ---
 def instalar_heroic():
   subprocess.run(
@@ -196,8 +215,8 @@ def driversNvidia():
 # --- CASE 3 ---
 def appsGame():
   appsGame = [
-  "steam",
-  "lutris",
+  "stristeam",
+  "lu",
   "wine",
   "winetricks",
   "gamemode",
@@ -207,6 +226,7 @@ def appsGame():
   "openrgb"
   ]
 
+  instalar_proton()
   instalar_heroic()
   install(appsGame)
 
