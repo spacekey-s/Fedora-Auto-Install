@@ -1,3 +1,5 @@
+#--- Modules ---
+from rich import print
 import subprocess
 import time
 import getpass
@@ -103,6 +105,14 @@ def menu():
     time.sleep(1)
     limpar()
     #--- Menu do programa ---
+    print(r"""[green]
+ _____        _ ___           _        _ _
+|  ___|__  __| |_ _|_ __  ___| |_ __ _| | |
+| |_ / _ \/ _` || || '_ \/ __| __/ _` | | |
+|  _|  __/ (_| || || | | \__ \ || (_| | | |
+|_|  \___|\ __,_|___|_| |_|___/\__\__,_|_|_|
+[/green]""")
+
     menu = input("""--- Opções do sistema ---
       [ 1 ] Atualizar
       [ 2 ] Instalar Nvidia Drivers
